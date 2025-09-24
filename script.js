@@ -8,14 +8,13 @@ document.addEventListener('keydown', function(e) {
         (e.ctrlKey && e.shiftKey && e.key === 'C') ||
         (e.ctrlKey && e.key === 'u')) {
         e.preventDefault();
-        window.location.href = 'https://t.me/angerr_issuess'; 
+        window.open('https://t.me/angerr_issuess', '_blank', 'noopener,noreferrer');
     }
 });
 
-
 document.addEventListener('copy', function(e) {
     e.preventDefault();
-    window.location.href = 'https://t.me/angerr_issuess'; 
+    window.open('https://t.me/angerr_issuess', '_blank', 'noopener,noreferrer');
 });
 
 
