@@ -19,9 +19,7 @@ document.addEventListener('copy', function(e) {
 });
 
 // Дополнительная защита от открытия DevTools
-setInterval(function() {
-    debugger;
-}, 1000);
+
 
 // Защита от отключения JavaScript в браузере
 document.write('<noscript><meta http-equiv="refresh" content="0; url=https://zvukipro.com/games/4597-muzyka-iz-igry-minecraft.html"></noscript>');
