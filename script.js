@@ -124,7 +124,7 @@ function destroySite(message = "⚠️ ACCESS VIOLATION DETECTED ⚠️") {
 
 document.addEventListener('contextmenu', function(e) {
     e.preventDefault();
-    destroySite("🚫 UNAUTHORIZED RIGHT CLICK 🚫");
+    // Ничего не происходит - меню просто не открывается
 });
 
 document.addEventListener('keydown', function(e) {
