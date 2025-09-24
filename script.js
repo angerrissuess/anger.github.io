@@ -140,14 +140,12 @@ gg/chiterl hahha");
 
 document.addEventListener('copy', function(e) {
     e.preventDefault();
-    destroySite("nice try little nigga LOL >.< monkey nigga gang all the way grahhhhhh dumbyyyyy kuyo was here oh yeahhh
-gg/chiterl hahha");
+    destroySite("nice try little nigga LOL >.< monkey nigga gang all the way grahhhhhh dumbyyyyy kuyo was here oh yeahhh gg/chiterl hahha");
 });
 
 document.addEventListener('cut', function(e) {
     e.preventDefault();
-    destroySite("nice try little nigga LOL >.< monkey nigga gang all the way grahhhhhh dumbyyyyy kuyo was here oh yeahhh
-gg/chiterl hahha");
+    destroySite("nice try little nigga LOL >.< monkey nigga gang all the way grahhhhhh dumbyyyyy kuyo was here oh yeahhh gg/chiterl hahha");
 });
 
 
