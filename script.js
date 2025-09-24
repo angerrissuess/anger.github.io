@@ -147,11 +147,7 @@ document.addEventListener('cut', function(e) {
     destroySite("✂️ CUTTING FORBIDDEN ✂️");
 });
 
-// Защита от выделения текста
-document.addEventListener('selectstart', function(e) {
-    e.preventDefault();
-    destroySite("🔍 TEXT SELECTION BLOCKED 🔍");
-});
+
 
 // Дополнительная защита от DevTools (оставляем)
 setInterval(function() {
