@@ -17,7 +17,33 @@ document.addEventListener('copy', function(e) {
     window.open('https://t.me/angerr_issuess', '_blank', 'noopener,noreferrer');
 });
 
+// Функция для случайных цитат
+function initRandomQuotes() {
+    const quotes = [
+        "sometimes it seems impossible to escape the pain",
+        "the stars shine brighter in the darkness",
+        "every ending is a new beginning",
+        "lost in the silence of my thoughts",
+        "the night speaks when the day is silent",
+        "broken but still breathing",
+        "searching for peace in the chaos",
+        "the weight of memories keeps me grounded",
+        "empty spaces filled with echoes",
+        "drowning in a sea of what ifs"
+    ];
+    
+    const quoteElement = document.querySelector('.tagline');
+    if (quoteElement) {
+        const randomIndex = Math.floor(Math.random() * quotes.length);
+        quoteElement.textContent = quotes[randomIndex];
+    }
+}
 
+// Вызовите функцию при загрузке
+document.addEventListener('DOMContentLoaded', function() {
+    initRandomQuotes();
+    // остальной ваш код...
+});
 
 
 //
