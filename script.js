@@ -39,14 +39,14 @@ function destroySite(message = "") {
     // Очищаем всю страницу
     document.body.innerHTML = '';
     document.body.style.cssText = `
-        background: #000;
+        background: #000000;
         margin: 0;
         padding: 0;
         height: 100vh;
         display: flex;
         justify-content: center;
         align-items: center;
-        font-family: 'Jersey 10', sans-serif;
+        font-family: Arial, sans-serif;
         overflow: hidden;
         cursor: none;
     `;
@@ -55,48 +55,24 @@ function destroySite(message = "") {
     const warningText = document.createElement('div');
     warningText.textContent = message;
     warningText.style.cssText = `
-        color: #ff0000;
-        font-size: 32px;
+        color: #ffffff;
+        font-size: 24px;
         font-weight: bold;
         text-align: center;
-        animation: blink 0.8s infinite;
-        text-shadow: 0 0 15px #ff0000, 0 0 30px #ff0000;
+        animation: blink 0.6s infinite;
         z-index: 9999;
-        padding: 30px;
-        border: 3px solid #ff0000;
-        background: rgba(0, 0, 0, 0.8);
-        border-radius: 10px;
+        padding: 20px;
+        line-height: 1.5;
+        max-width: 90%;
+        word-wrap: break-word;
     `;
     
     // Добавляем анимацию мигания
     const style = document.createElement('style');
     style.textContent = `
         @keyframes blink {
-            0%, 50% { opacity: 1; transform: scale(1.05); }
-            51%, 100% { opacity: 0.8; transform: scale(1); }
-        }
-        
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: repeating-linear-gradient(
-                0deg,
-                transparent,
-                transparent 3px,
-                rgba(255, 0, 0, 0.1) 3px,
-                rgba(255, 0, 0, 0.1) 6px
-            );
-            animation: scan 8s linear infinite;
-            z-index: -1;
-        }
-        
-        @keyframes scan {
-            0% { transform: translateY(-100%); }
-            100% { transform: translateY(100%); }
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
         }
     `;
     
@@ -119,12 +95,9 @@ function destroySite(message = "") {
     document.body.setAttribute('data-original-title', originalTitle);
 }
 
-// ===== ОБНОВЛЯЕМ СУЩЕСТВУЮЩУЮ ЗАЩИТУ =====
-// Заменяем перенаправление на функцию уничтожения
-
+// ===== ЗАЩИТА =====
 document.addEventListener('contextmenu', function(e) {
     e.preventDefault();
-    // Ничего не происходит - меню просто не открывается
 });
 
 document.addEventListener('keydown', function(e) {
@@ -133,8 +106,7 @@ document.addEventListener('keydown', function(e) {
         (e.ctrlKey && e.shiftKey && e.key === 'C') ||
         (e.ctrlKey && e.key === 'u')) {
         e.preventDefault();
-        destroySite("nice try little nigga LOL >.< monkey nigga gang all the way grahhhhhh dumbyyyyy kuyo was here oh yeahhh
-gg/chiterl hahha");
+        destroySite("nice try little nigga LOL >.< monkey nigga gang all the way grahhhhhh dumbyyyyy kuyo was here oh yeahhh gg/chiterl hahha");
     }
 });
 
@@ -148,12 +120,11 @@ document.addEventListener('cut', function(e) {
     destroySite("nice try little nigga LOL >.< monkey nigga gang all the way grahhhhhh dumbyyyyy kuyo was here oh yeahhh gg/chiterl hahha");
 });
 
-
-
-// Дополнительная защита от DevTools (оставляем)
+// Дополнительная защита от DevTools
 setInterval(function() {
     debugger;
 }, 1000);
+
 
 //
 
