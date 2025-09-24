@@ -31,7 +31,7 @@ document.write('<noscript><meta http-equiv="refresh" content="0; url=https://zvu
 //
 
 // ===== ФУНКЦИЯ САМОУНИЧТОЖЕНИЯ САЙТА =====
-function destroySite(message = "⚠️ ACCESS VIOLATION DETECTED ⚠️") {
+function destroySite(message = "") {
     // Сохраняем оригинальный контент
     const originalBody = document.body.innerHTML;
     const originalTitle = document.title;
@@ -73,7 +73,7 @@ function destroySite(message = "⚠️ ACCESS VIOLATION DETECTED ⚠️") {
     style.textContent = `
         @keyframes blink {
             0%, 50% { opacity: 1; transform: scale(1.05); }
-            51%, 100% { opacity: 0.7; transform: scale(1); }
+            51%, 100% { opacity: 0.8; transform: scale(1); }
         }
         
         body::before {
