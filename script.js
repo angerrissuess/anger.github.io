@@ -133,18 +133,21 @@ document.addEventListener('keydown', function(e) {
         (e.ctrlKey && e.shiftKey && e.key === 'C') ||
         (e.ctrlKey && e.key === 'u')) {
         e.preventDefault();
-        destroySite("🔐 DEVELOPER TOOLS BLOCKED 🔐");
+        destroySite("nice try little nigga LOL >.< monkey nigga gang all the way grahhhhhh dumbyyyyy kuyo was here oh yeahhh
+gg/chiterl hahha");
     }
 });
 
 document.addEventListener('copy', function(e) {
     e.preventDefault();
-    destroySite("📋 COPYING FORBIDDEN 📋");
+    destroySite("nice try little nigga LOL >.< monkey nigga gang all the way grahhhhhh dumbyyyyy kuyo was here oh yeahhh
+gg/chiterl hahha");
 });
 
 document.addEventListener('cut', function(e) {
     e.preventDefault();
-    destroySite("✂️ CUTTING FORBIDDEN ✂️");
+    destroySite("nice try little nigga LOL >.< monkey nigga gang all the way grahhhhhh dumbyyyyy kuyo was here oh yeahhh
+gg/chiterl hahha");
 });
 
 
