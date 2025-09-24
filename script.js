@@ -216,7 +216,7 @@ document.addEventListener('DOMContentLoaded', function() {
         ];
         
        
-        const coefficients = [0.02, 0.01, 0.005];
+        const coefficients = [0.05, 0.03, 0.015];
         
         document.addEventListener('mousemove', (e) => {
             const mouseX = e.clientX / window.innerWidth - 0.5;
