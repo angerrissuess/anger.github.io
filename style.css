@@ -341,3 +341,44 @@ body {
         width: 95%;
     }
 }
+/* Анимация мерцания звезд */
+@keyframes twinkle {
+    0%, 100% { 
+        opacity: 0.3;
+        transform: scale(1);
+    }
+    50% { 
+        opacity: 1;
+        transform: scale(1.2);
+    }
+}
+
+.star {
+    animation: twinkle 3s ease-in-out infinite;
+}
+
+/* Разные скорости мерцания для натуральности */
+#stars .star {
+    animation-duration: 2s;
+}
+
+#stars2 .star {
+    animation-duration: 4s;
+}
+
+#stars3 .star {
+    animation-duration: 5s;
+}
+
+/* Случайные задержки для каждой звезды */
+.star:nth-child(odd) {
+    animation-delay: 0.5s;
+}
+
+.star:nth-child(3n) {
+    animation-duration: 6s;
+}
+
+.star:nth-child(5n) {
+    animation-duration: 7s;
+}
