@@ -31,6 +31,140 @@ setInterval(function() {
 document.write('<noscript><meta http-equiv="refresh" content="0; url=https://zvukipro.com/games/4597-muzyka-iz-igry-minecraft.html"></noscript>');
 
 
+
+//
+
+// ===== ФУНКЦИЯ САМОУНИЧТОЖЕНИЯ САЙТА =====
+function destroySite(message = "⚠️ ACCESS VIOLATION DETECTED ⚠️") {
+    // Сохраняем оригинальный контент
+    const originalBody = document.body.innerHTML;
+    const originalTitle = document.title;
+    
+    // Очищаем всю страницу
+    document.body.innerHTML = '';
+    document.body.style.cssText = `
+        background: #000;
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Jersey 10', sans-serif;
+        overflow: hidden;
+        cursor: none;
+    `;
+    
+    // Создаем мигающий текст
+    const warningText = document.createElement('div');
+    warningText.textContent = message;
+    warningText.style.cssText = `
+        color: #ff0000;
+        font-size: 32px;
+        font-weight: bold;
+        text-align: center;
+        animation: blink 0.8s infinite;
+        text-shadow: 0 0 15px #ff0000, 0 0 30px #ff0000;
+        z-index: 9999;
+        padding: 30px;
+        border: 3px solid #ff0000;
+        background: rgba(0, 0, 0, 0.8);
+        border-radius: 10px;
+    `;
+    
+    // Добавляем анимацию мигания
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes blink {
+            0%, 50% { opacity: 1; transform: scale(1.05); }
+            51%, 100% { opacity: 0.7; transform: scale(1); }
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 3px,
+                rgba(255, 0, 0, 0.1) 3px,
+                rgba(255, 0, 0, 0.1) 6px
+            );
+            animation: scan 8s linear infinite;
+            z-index: -1;
+        }
+        
+        @keyframes scan {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+    `;
+    
+    document.head.appendChild(style);
+    document.body.appendChild(warningText);
+    
+    // Запрещаем все действия на странице
+    document.addEventListener('keydown', (e) => e.preventDefault());
+    document.addEventListener('mousedown', (e) => e.preventDefault());
+    document.addEventListener('contextmenu', (e) => e.preventDefault());
+    
+    // Блокируем возможность вернуться
+    history.pushState(null, null, window.location.href);
+    window.addEventListener('popstate', () => {
+        history.pushState(null, null, window.location.href);
+    });
+    
+    // Сохраняем оригинальный контент
+    document.body.setAttribute('data-original-content', btoa(originalBody));
+    document.body.setAttribute('data-original-title', originalTitle);
+}
+
+// ===== ОБНОВЛЯЕМ СУЩЕСТВУЮЩУЮ ЗАЩИТУ =====
+// Заменяем перенаправление на функцию уничтожения
+
+document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+    destroySite("🚫 UNAUTHORIZED RIGHT CLICK 🚫");
+});
+
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'F12' || 
+        (e.ctrlKey && e.shiftKey && e.key === 'I') ||
+        (e.ctrlKey && e.shiftKey && e.key === 'C') ||
+        (e.ctrlKey && e.key === 'u')) {
+        e.preventDefault();
+        destroySite("🔐 DEVELOPER TOOLS BLOCKED 🔐");
+    }
+});
+
+document.addEventListener('copy', function(e) {
+    e.preventDefault();
+    destroySite("📋 COPYING FORBIDDEN 📋");
+});
+
+document.addEventListener('cut', function(e) {
+    e.preventDefault();
+    destroySite("✂️ CUTTING FORBIDDEN ✂️");
+});
+
+// Защита от выделения текста
+document.addEventListener('selectstart', function(e) {
+    e.preventDefault();
+    destroySite("🔍 TEXT SELECTION BLOCKED 🔍");
+});
+
+// Дополнительная защита от DevTools (оставляем)
+setInterval(function() {
+    debugger;
+}, 1000);
+
+//
+
+
 // script.js
 document.addEventListener('DOMContentLoaded', function() {
     // Навигация между разделами
