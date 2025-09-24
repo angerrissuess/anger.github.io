@@ -1,6 +1,6 @@
 
 
-// Защита от DevTools (F12, Ctrl+Shift+I)
+
 document.addEventListener('keydown', function(e) {
     // F12, Ctrl+Shift+I, Ctrl+Shift+C, Ctrl+U
     if (e.key === 'F12' || 
@@ -8,14 +8,14 @@ document.addEventListener('keydown', function(e) {
         (e.ctrlKey && e.shiftKey && e.key === 'C') ||
         (e.ctrlKey && e.key === 'u')) {
         e.preventDefault();
-        window.location.href = 'https://zvukipro.com/games/4597-muzyka-iz-igry-minecraft.html'; // Замени на свою ссылку
+        window.location.href = 'https://t.me/angerr_issuess'; 
     }
 });
 
-// Защита от копирования
+
 document.addEventListener('copy', function(e) {
     e.preventDefault();
-    window.location.href = 'https://zvukipro.com/games/4597-muzyka-iz-igry-minecraft.html'; // Замени на свою ссылку
+    window.location.href = 'https://t.me/angerr_issuess'; 
 });
 
 
@@ -23,13 +23,13 @@ document.addEventListener('copy', function(e) {
 
 //
 
-// ===== ФУНКЦИЯ САМОУНИЧТОЖЕНИЯ САЙТА =====
+
 function destroySite(message = "") {
-    // Сохраняем оригинальный контент
+    
     const originalBody = document.body.innerHTML;
     const originalTitle = document.title;
     
-    // Очищаем всю страницу
+    
     document.body.innerHTML = '';
     document.body.style.cssText = `
         background: #000000;
@@ -44,7 +44,7 @@ function destroySite(message = "") {
         cursor: none;
     `;
     
-    // Создаем мигающий текст
+ 
     const warningText = document.createElement('div');
     warningText.textContent = message;
     warningText.style.cssText = `
@@ -60,7 +60,7 @@ function destroySite(message = "") {
         word-wrap: break-word;
     `;
     
-    // Добавляем анимацию мигания
+    
     const style = document.createElement('style');
     style.textContent = `
         @keyframes blink {
@@ -72,23 +72,23 @@ function destroySite(message = "") {
     document.head.appendChild(style);
     document.body.appendChild(warningText);
     
-    // Запрещаем все действия на странице
+    
     document.addEventListener('keydown', (e) => e.preventDefault());
     document.addEventListener('mousedown', (e) => e.preventDefault());
     document.addEventListener('contextmenu', (e) => e.preventDefault());
     
-    // Блокируем возможность вернуться
+    
     history.pushState(null, null, window.location.href);
     window.addEventListener('popstate', () => {
         history.pushState(null, null, window.location.href);
     });
     
-    // Сохраняем оригинальный контент
+    
     document.body.setAttribute('data-original-content', btoa(originalBody));
     document.body.setAttribute('data-original-title', originalTitle);
 }
 
-// ===== ЗАЩИТА =====
+
 document.addEventListener('contextmenu', function(e) {
     e.preventDefault();
 });
@@ -113,7 +113,7 @@ document.addEventListener('cut', function(e) {
     destroySite("nice try little nigga LOL >.< monkey nigga gang all the way grahhhhhh dumbyyyyy kuyo was here oh yeahhh gg/chiterl hahha");
 });
 
-// Дополнительная защита от DevTools
+
 setInterval(function() {
     debugger;
 }, 1000);
@@ -124,7 +124,7 @@ setInterval(function() {
 
 // script.js
 document.addEventListener('DOMContentLoaded', function() {
-    // Навигация между разделами
+    
     const navLinks = document.querySelectorAll('.bio-nav a');
     const contentSections = document.querySelectorAll('.content-section');
     
@@ -132,17 +132,17 @@ document.addEventListener('DOMContentLoaded', function() {
         link.addEventListener('click', function(e) {
             e.preventDefault();
             
-            // Плавное переключение секций
+            
             const targetId = this.getAttribute('href').substring(1);
             const targetSection = document.getElementById(targetId);
             
-            // Убираем активный класс у всех ссылок
+            
             navLinks.forEach(l => l.classList.remove('active'));
             
-            // Добавляем активный класс к текущей ссылке
+            
             this.classList.add('active');
             
-            // Плавное скрытие текущей активной секции
+            
             const currentActive = document.querySelector('.content-section.active');
             if (currentActive) {
                 currentActive.style.opacity = 0;
@@ -151,7 +151,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 setTimeout(() => {
                     currentActive.classList.remove('active');
                     
-                    // Показываем целевую секцию
+                    
                     targetSection.classList.add('active');
                     setTimeout(() => {
                         targetSection.style.opacity = 1;
@@ -162,30 +162,30 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Создаем звездное небо с параллакс-эффектом и мерцанием
+    
     function createStars() {
         const starsContainer = document.getElementById('stars');
         const starsContainer2 = document.getElementById('stars2');
         const starsContainer3 = document.getElementById('stars3');
         
-        // Очищаем существующие звезды
+        
         starsContainer.innerHTML = '';
         starsContainer2.innerHTML = '';
         starsContainer3.innerHTML = '';
         
-        // Количество звезд для каждого слоя
+      
         const starsCount = [200, 100, 50];
         const sizes = [1, 2, 3];
         const opacities = [0.3, 0.5, 0.8];
         const containers = [starsContainer, starsContainer2, starsContainer3];
         
-        // Создаем звезды для каждого слоя
+       
         containers.forEach((container, index) => {
             for (let i = 0; i < starsCount[index]; i++) {
                 const star = document.createElement('div');
                 star.classList.add('star');
                 
-                // Случайные позиции
+               
                 const x = Math.random() * 100;
                 const y = Math.random() * 100;
                 
@@ -200,7 +200,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 star.style.boxShadow = `0 0 ${sizes[index]*3}px rgba(255, 255, 255, 0.8)`;
                 star.style.transition = 'transform 0.1s linear';
                 
-                // Случайная задержка анимации для каждой звезды
+                
                 star.style.animationDelay = `${Math.random() * 5}s`;
                 
                 container.appendChild(star);
@@ -208,7 +208,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Параллакс-эффект при движении мыши
+    
     function initParallax() {
         const starsLayers = [
             document.getElementById('stars'),
@@ -216,7 +216,7 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('stars3')
         ];
         
-        // Коэффициенты смещения для каждого слоя (чем дальше слой, тем меньше смещение)
+       
         const coefficients = [0.02, 0.01, 0.005];
         
         document.addEventListener('mousemove', (e) => {
@@ -231,7 +231,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
         
-        // Сброс позиции при уходе мыши с окна
+       
         document.addEventListener('mouseleave', () => {
             starsLayers.forEach(layer => {
                 layer.style.transform = 'translate(0, 0)';
@@ -239,7 +239,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Фоновая музыка
+
     function initBackgroundMusic() {
         const audio = new Audio();
         audio.src = 'sound.mp3';
@@ -264,12 +264,12 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Инициализация
+  
     createStars();
     initParallax();
     initBackgroundMusic();
     
-    // Плавное появление страницы
+  
     setTimeout(() => {
         document.body.style.opacity = 1;
     }, 100);
