@@ -158,3 +158,32 @@ document.addEventListener('DOMContentLoaded', function() {
         element.style.transition = 'all 0.5s ease';
     });
 });
+
+function initBackgroundMusic() {
+    const audio = new Audio();
+    audio.src = 'sound.mp3';
+    audio.loop = true;
+    audio.volume = 0.7; 
+    
+   
+    const playPromise = audio.play();
+    
+    if (playPromise !== undefined) {
+        playPromise.catch(error => {
+            
+            console.log('Автовоспроизведение заблокировано, ждем взаимодействия...');
+            
+            const startMusic = () => {
+                audio.play();
+                document.removeEventListener('click', startMusic);
+                document.removeEventListener('keydown', startMusic);
+            };
+            
+            document.addEventListener('click', startMusic);
+            document.addEventListener('keydown', startMusic);
+        });
+    }
+}
+
+
+window.addEventListener('load', initBackgroundMusic);
