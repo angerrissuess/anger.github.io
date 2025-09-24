@@ -1,7 +1,7 @@
 // Защита от ПКМ и клавиш
 document.addEventListener('contextmenu', function(e) {
     e.preventDefault();
-    window.location.href = 'https://zvukipro.com/games/4597-muzyka-iz-igry-minecraft.html'; // Замени на свою ссылку
+    
 });
 
 // Защита от DevTools (F12, Ctrl+Shift+I)
