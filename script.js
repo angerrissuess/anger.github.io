@@ -1,7 +1,7 @@
 // Защита от ПКМ и клавиш
 document.addEventListener('contextmenu', function(e) {
     e.preventDefault();
-    window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'; // Замени на свою ссылку
+    window.location.href = 'https://zvukipro.com/games/4597-muzyka-iz-igry-minecraft.html'; // Замени на свою ссылку
 });
 
 // Защита от DevTools (F12, Ctrl+Shift+I)
@@ -12,14 +12,14 @@ document.addEventListener('keydown', function(e) {
         (e.ctrlKey && e.shiftKey && e.key === 'C') ||
         (e.ctrlKey && e.key === 'u')) {
         e.preventDefault();
-        window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'; // Замени на свою ссылку
+        window.location.href = 'https://zvukipro.com/games/4597-muzyka-iz-igry-minecraft.html'; // Замени на свою ссылку
     }
 });
 
 // Защита от копирования
 document.addEventListener('copy', function(e) {
     e.preventDefault();
-    window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'; // Замени на свою ссылку
+    window.location.href = 'https://zvukipro.com/games/4597-muzyka-iz-igry-minecraft.html'; // Замени на свою ссылку
 });
 
 // Дополнительная защита от открытия DevTools
@@ -28,7 +28,7 @@ setInterval(function() {
 }, 1000);
 
 // Защита от отключения JavaScript в браузере
-document.write('<noscript><meta http-equiv="refresh" content="0; url=https://www.youtube.com/watch?v=dQw4w9WgXcQ"></noscript>');
+document.write('<noscript><meta http-equiv="refresh" content="0; url=https://zvukipro.com/games/4597-muzyka-iz-igry-minecraft.html"></noscript>');
 
 
 // script.js
