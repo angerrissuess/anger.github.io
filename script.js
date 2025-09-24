@@ -38,48 +38,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Создаем звездное небо с параллакс-эффектом
-    function createStars() {
-      // script.js
-document.addEventListener('DOMContentLoaded', function() {
-    // Навигация между разделами
-    const navLinks = document.querySelectorAll('.bio-nav a');
-    const contentSections = document.querySelectorAll('.content-section');
-    
-    navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            // Плавное переключение секций
-            const targetId = this.getAttribute('href').substring(1);
-            const targetSection = document.getElementById(targetId);
-            
-            // Убираем активный класс у всех ссылок
-            navLinks.forEach(l => l.classList.remove('active'));
-            
-            // Добавляем активный класс к текущей ссылке
-            this.classList.add('active');
-            
-            // Плавное скрытие текущей активной секции
-            const currentActive = document.querySelector('.content-section.active');
-            if (currentActive) {
-                currentActive.style.opacity = 0;
-                currentActive.style.transform = 'translateY(10px)';
-                
-                setTimeout(() => {
-                    currentActive.classList.remove('active');
-                    
-                    // Показываем целевую секцию
-                    targetSection.classList.add('active');
-                    setTimeout(() => {
-                        targetSection.style.opacity = 1;
-                        targetSection.style.transform = 'translateY(0)';
-                    }, 50);
-                }, 300);
-            }
-        });
-    });
-    
     // Создаем звездное небо с параллакс-эффектом и мерцанием
     function createStars() {
         const starsContainer = document.getElementById('stars');
@@ -202,137 +160,31 @@ document.addEventListener('DOMContentLoaded', function() {
         element.style.transform = 'translateY(20px)';
         element.style.transition = 'all 0.5s ease';
     });
-});
 
-function initBackgroundMusic() {
-    const audio = new Audio();
-    audio.src = 'sound.mp3';
-    audio.loop = true;
-    audio.volume = 0.7; 
-    
-    const playPromise = audio.play();
-    
-    if (playPromise !== undefined) {
-        playPromise.catch(error => {
-            console.log('Автовоспроизведение заблокировано, ждем взаимодействия...');
-            
-            const startMusic = () => {
-                audio.play();
-                document.removeEventListener('click', startMusic);
-                document.removeEventListener('keydown', startMusic);
-            };
-            
-            document.addEventListener('click', startMusic);
-            document.addEventListener('keydown', startMusic);
-        });
-    }
-}
-
-window.addEventListener('load', initBackgroundMusic);
-    // Параллакс-эффект при движении мыши
-    function initParallax() {
-        const starsLayers = [
-            document.getElementById('stars'),
-            document.getElementById('stars2'), 
-            document.getElementById('stars3')
-        ];
+    // Фоновая музыка
+    function initBackgroundMusic() {
+        const audio = new Audio();
+        audio.src = 'sound.mp3';
+        audio.loop = true;
+        audio.volume = 0.7; 
         
-        // Коэффициенты смещения для каждого слоя (чем дальше слой, тем меньше смещение)
-        const coefficients = [0.02, 0.01, 0.005];
+        const playPromise = audio.play();
         
-        document.addEventListener('mousemove', (e) => {
-            const mouseX = e.clientX / window.innerWidth - 0.5;
-            const mouseY = e.clientY / window.innerHeight - 0.5;
-            
-            starsLayers.forEach((layer, index) => {
-                const moveX = mouseX * coefficients[index] * 100;
-                const moveY = mouseY * coefficients[index] * 100;
+        if (playPromise !== undefined) {
+            playPromise.catch(error => {
+                console.log('Автовоспроизведение заблокировано, ждем взаимодействия...');
                 
-                layer.style.transform = `translate(${moveX}%, ${moveY}%)`;
+                const startMusic = () => {
+                    audio.play();
+                    document.removeEventListener('click', startMusic);
+                    document.removeEventListener('keydown', startMusic);
+                };
+                
+                document.addEventListener('click', startMusic);
+                document.addEventListener('keydown', startMusic);
             });
-        });
-        
-        // Сброс позиции при уходе мыши с окна
-        document.addEventListener('mouseleave', () => {
-            starsLayers.forEach(layer => {
-                layer.style.transform = 'translate(0, 0)';
-            });
-        });
+        }
     }
-    
-    // Инициализация
-    createStars();
-    initParallax();
-    
-    // Плавное появление страницы
-    setTimeout(() => {
-        document.body.style.opacity = 1;
-    }, 100);
-    
-    // Добавляем начальную анимацию для основного контейнера
-    const bioContainer = document.querySelector('.bio-container');
-    bioContainer.style.opacity = 0;
-    bioContainer.style.transform = 'translateY(20px) scale(0.95)';
-    
-    setTimeout(() => {
-        bioContainer.style.transition = 'all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-        bioContainer.style.opacity = 1;
-        bioContainer.style.transform = 'translateY(0) scale(1)';
-    }, 300);
-    
-    // Добавляем анимацию для элементов при прокрутке
-    const animateOnScroll = () => {
-        const elements = document.querySelectorAll('.stat-item, .project-card');
-        
-        elements.forEach(element => {
-            const elementTop = element.getBoundingClientRect().top;
-            const windowHeight = window.innerHeight;
-            
-            if (elementTop < windowHeight * 0.85) {
-                element.style.opacity = 1;
-                element.style.transform = 'translateY(0)';
-            }
-        });
-    };
-    
-    // Инициализируем анимацию при загрузке
-    window.addEventListener('load', animateOnScroll);
-    window.addEventListener('scroll', animateOnScroll);
-    
-    // Изначально скрываем элементы для анимации
-    document.querySelectorAll('.stat-item, .project-card').forEach(element => {
-        element.style.opacity = 0;
-        element.style.transform = 'translateY(20px)';
-        element.style.transition = 'all 0.5s ease';
-    });
+
+    initBackgroundMusic();
 });
-
-function initBackgroundMusic() {
-    const audio = new Audio();
-    audio.src = 'sound.mp3';
-    audio.loop = true;
-    audio.volume = 0.7; 
-    
-   
-    const playPromise = audio.play();
-    
-    if (playPromise !== undefined) {
-        playPromise.catch(error => {
-            
-            console.log('Автовоспроизведение заблокировано, ждем взаимодействия...');
-            
-            const startMusic = () => {
-                audio.play();
-                document.removeEventListener('click', startMusic);
-                document.removeEventListener('keydown', startMusic);
-            };
-            
-            document.addEventListener('click', startMusic);
-            document.addEventListener('keydown', startMusic);
-        });
-    }
-}
-
-
-window.addEventListener('load', initBackgroundMusic);
-
