@@ -1,8 +1,4 @@
-// Защита от ПКМ и клавиш
-document.addEventListener('contextmenu', function(e) {
-    e.preventDefault();
-    
-});
+
 
 // Защита от DevTools (F12, Ctrl+Shift+I)
 document.addEventListener('keydown', function(e) {
