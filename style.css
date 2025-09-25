@@ -23,6 +23,32 @@ body {
 }
 /* комментарии */
 /* Стили для комментариев */
+.comment-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.comment-avatar {
+    border-radius: 50%;
+}
+
+.comment-author {
+    font-weight: bold;
+    color: #6a11cb;
+}
+
+.comment-date {
+    color: #666;
+    font-size: 12px;
+}
+
+.comment-text {
+    color: #ccc;
+    line-height: 1.5;
+    white-space: pre-wrap;
+}
 .comments-container {
     max-width: 600px;
     margin: 0 auto;
