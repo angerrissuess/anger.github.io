@@ -150,6 +150,82 @@ setInterval(function() {
 // script.js
 document.addEventListener('DOMContentLoaded', function() {
     
+    // Система комментариев
+function initCommentsSystem() {
+    const commentsList = document.getElementById('comments-list');
+    const commentForm = document.querySelector('.comment-form');
+    
+    if (!commentsList || !commentForm) return;
+    
+    function loadComments() {
+        const comments = JSON.parse(localStorage.getItem('siteComments') || '[]');
+        displayComments(comments);
+    }
+    
+    function displayComments(comments) {
+        commentsList.innerHTML = '';
+        
+        if (comments.length === 0) {
+            commentsList.innerHTML = '<p style="text-align: center; color: #666;">No comments yet. Be the first!</p>';
+            return;
+        }
+        
+        comments.sort((a, b) => new Date(b.date) - new Date(a.date));
+        
+        comments.forEach(comment => {
+            const commentElement = document.createElement('div');
+            commentElement.className = 'comment-item';
+            commentElement.innerHTML = `
+                <div class="comment-author">${escapeHtml(comment.name)}</div>
+                <div class="comment-text">${escapeHtml(comment.text)}</div>
+                <div class="comment-date">${new Date(comment.date).toLocaleDateString()}</div>
+            `;
+            commentsList.appendChild(commentElement);
+        });
+    }
+    
+    commentForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const nameInput = document.getElementById('comment-name');
+        const textInput = document.getElementById('comment-text');
+        
+        const name = nameInput.value.trim();
+        const text = textInput.value.trim();
+        
+        if (!name || !text) {
+            alert('Please fill in all fields');
+            return;
+        }
+        
+        const comments = JSON.parse(localStorage.getItem('siteComments') || '[]');
+        const newComment = {
+            name: name,
+            text: text,
+            date: new Date().toISOString()
+        };
+        
+        comments.push(newComment);
+        localStorage.setItem('siteComments', JSON.stringify(comments));
+        
+        displayComments(comments);
+        
+        nameInput.value = '';
+        textInput.value = '';
+        
+        alert('Comment added!');
+    });
+    
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+    
+    loadComments();
+}
+    // Система комментариев
+    
     const navLinks = document.querySelectorAll('.bio-nav a');
     const contentSections = document.querySelectorAll('.content-section');
     
@@ -289,7 +365,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-  
+    initCommentsSystem();
     createStars();
     initParallax();
     initBackgroundMusic();
