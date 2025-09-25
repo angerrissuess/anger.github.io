@@ -21,7 +21,74 @@ body {
     cursor: default;
     transition: all 0.3s ease;
 }
+/* комментарии */
+/* Стили для комментариев */
+.comments-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
 
+.comment-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.comment-form input,
+.comment-form textarea {
+    padding: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(30, 30, 40, 0.8);
+    color: white;
+    border-radius: 5px;
+    font-family: inherit;
+}
+
+.comment-form textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.comment-form button {
+    padding: 12px;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.comment-form button:hover {
+    transform: translateY(-2px);
+}
+
+.comment-item {
+    background: rgba(30, 30, 40, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.comment-author {
+    font-weight: bold;
+    color: #6a11cb;
+    margin-bottom: 5px;
+}
+
+.comment-text {
+    color: #ccc;
+    line-height: 1.5;
+}
+
+.comment-date {
+    font-size: 12px;
+    color: #666;
+    margin-top: 10px;
+}
+/* комментарии */
 /* Слои звездного неба */
 .stars-layer {
     position: fixed;
