@@ -151,78 +151,158 @@ setInterval(function() {
 document.addEventListener('DOMContentLoaded', function() {
     
     // Система комментариев
-function initCommentsSystem() {
+// GitHub Issues система комментариев
+async function initCommentsSystem() {
     const commentsList = document.getElementById('comments-list');
     const commentForm = document.querySelector('.comment-form');
     
     if (!commentsList || !commentForm) return;
     
-    function loadComments() {
-        const comments = JSON.parse(localStorage.getItem('siteComments') || '[]');
+    // Показываем загрузку
+    commentsList.innerHTML = '<div style="text-align: center; color: #666;">Loading comments...</div>';
+    
+    try {
+        // Загружаем комментарии из GitHub Issue
+        const comments = await loadCommentsFromGitHub();
         displayComments(comments);
+    } catch (error) {
+        console.error('Error loading comments:', error);
+        commentsList.innerHTML = '<div style="text-align: center; color: #ff6b6b;">Error loading comments</div>';
     }
     
+    // Обработка отправки формы
+    commentForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const nameInput = document.getElementById('comment-name');
+        const textInput = document.getElementById('comment-text');
+        
+        const name = nameInput.value.trim() || 'Anonymous';
+        const text = textInput.value.trim();
+        
+        if (!text) {
+            alert('Please enter a message');
+            return;
+        }
+        
+        try {
+            // Отправляем комментарий в GitHub Issue
+            await postCommentToGitHub(name, text);
+            
+            // Очищаем форму
+            nameInput.value = '';
+            textInput.value = '';
+            
+            // Перезагружаем комментарии
+            const comments = await loadCommentsFromGitHub();
+            displayComments(comments);
+            
+            alert('Comment posted! It may take a few seconds to appear.');
+        } catch (error) {
+            console.error('Error posting comment:', error);
+            alert('Error posting comment. Please try again.');
+        }
+    });
+    
+    // Функция загрузки комментариев из GitHub
+    async function loadCommentsFromGitHub() {
+        const response = await fetch(
+            `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/issues/${ISSUE_NUMBER}/comments`,
+            {
+                headers: {
+                    'Authorization': `token ${GITHUB_TOKEN}`,
+                    'Accept': 'application/vnd.github.v3+json'
+                }
+            }
+        );
+        
+        if (!response.ok) {
+            throw new Error(`GitHub API error: ${response.status}`);
+        }
+        
+        const commentsData = await response.json();
+        
+        // Преобразуем данные GitHub в наш формат
+        return commentsData.map(comment => ({
+            id: comment.id,
+            name: comment.user ? comment.user.login : 'Anonymous',
+            text: comment.body,
+            date: comment.created_at,
+            avatar: comment.user ? comment.user.avatar_url : null
+        }));
+    }
+    
+    // Функция отправки комментария в GitHub
+    async function postCommentToGitHub(name, text) {
+        const commentBody = `**Name:** ${name}\n\n**Comment:** ${text}`;
+        
+        const response = await fetch(
+            `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/issues/${ISSUE_NUMBER}/comments`,
+            {
+                method: 'POST',
+                headers: {
+                    'Authorization': `token ${GITHUB_TOKEN}`,
+                    'Accept': 'application/vnd.github.v3+json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    body: commentBody
+                })
+            }
+        );
+        
+        if (!response.ok) {
+            throw new Error(`GitHub API error: ${response.status}`);
+        }
+        
+        return await response.json();
+    }
+    
+    // Функция отображения комментариев
     function displayComments(comments) {
         commentsList.innerHTML = '';
         
         if (comments.length === 0) {
-            commentsList.innerHTML = '<p style="text-align: center; color: #666;">No comments yet. Be the first!</p>';
+            commentsList.innerHTML = '<div style="text-align: center; color: #666;">No comments yet. Be the first!</div>';
             return;
         }
         
+        // Сортируем по дате (новые сверху)
         comments.sort((a, b) => new Date(b.date) - new Date(a.date));
         
         comments.forEach(comment => {
             const commentElement = document.createElement('div');
             commentElement.className = 'comment-item';
             commentElement.innerHTML = `
-                <div class="comment-author">${escapeHtml(comment.name)}</div>
-                <div class="comment-text">${escapeHtml(comment.text)}</div>
-                <div class="comment-date">${new Date(comment.date).toLocaleDateString()}</div>
+                <div class="comment-header">
+                    ${comment.avatar ? 
+                        `<img src="${comment.avatar}" class="comment-avatar" width="20" height="20">` : 
+                        ''}
+                    <span class="comment-author">${escapeHtml(comment.name)}</span>
+                    <span class="comment-date">${formatDate(comment.date)}</span>
+                </div>
+                <div class="comment-text">${escapeHtml(comment.text.replace('**Comment:** ', ''))}</div>
             `;
             commentsList.appendChild(commentElement);
         });
     }
     
-    commentForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const nameInput = document.getElementById('comment-name');
-        const textInput = document.getElementById('comment-text');
-        
-        const name = nameInput.value.trim();
-        const text = textInput.value.trim();
-        
-        if (!name || !text) {
-            alert('Please fill in all fields');
-            return;
-        }
-        
-        const comments = JSON.parse(localStorage.getItem('siteComments') || '[]');
-        const newComment = {
-            name: name,
-            text: text,
-            date: new Date().toISOString()
-        };
-        
-        comments.push(newComment);
-        localStorage.setItem('siteComments', JSON.stringify(comments));
-        
-        displayComments(comments);
-        
-        nameInput.value = '';
-        textInput.value = '';
-        
-        alert('Comment added!');
-    });
-    
+    // Вспомогательные функции
     function escapeHtml(text) {
         const div = document.createElement('div');
         div.textContent = text;
         return div.innerHTML;
     }
     
-    loadComments();
+    function formatDate(dateString) {
+        return new Date(dateString).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+    }
 }
     // Система комментариев
     
