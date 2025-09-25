@@ -151,32 +151,24 @@ setInterval(function() {
 document.addEventListener('DOMContentLoaded', function() {
     
     // Система комментариев
-// Заменяем функцию initCommentsSystem() на эту:
-
 function initCommentsSystem() {
     const commentsList = document.getElementById('comments-list');
     const commentForm = document.querySelector('.comment-form');
     
     if (!commentsList || !commentForm) return;
     
-    // Показываем инструкцию
-    commentsList.innerHTML = `
-        <div style="text-align: center; padding: 20px; color: #666;">
-            <p>💬 Comments are stored in browser localStorage</p>
-            <p>📱 Only visible in this browser on this device</p>
-            <p>🌐 For public comments use Telegram: <a href="https://t.me/angerr_issuess" target="_blank">@angerr_issuess</a></p>
-        </div>
-    `;
-    
     function loadComments() {
         const comments = JSON.parse(localStorage.getItem('siteComments') || '[]');
-        if (comments.length > 0) {
-            displayComments(comments);
-        }
+        displayComments(comments);
     }
     
     function displayComments(comments) {
         commentsList.innerHTML = '';
+        
+        if (comments.length === 0) {
+            commentsList.innerHTML = '<p style="text-align: center; color: #666;">No comments yet. Be the first!</p>';
+            return;
+        }
         
         comments.sort((a, b) => new Date(b.date) - new Date(a.date));
         
@@ -221,7 +213,7 @@ function initCommentsSystem() {
         nameInput.value = '';
         textInput.value = '';
         
-        alert('Comment saved locally! Others won\\'t see it.');
+        alert('Comment added!');
     });
     
     function escapeHtml(text) {
